@@ -86,3 +86,8 @@ button {
   color: #ffffff;
   border: none;
 }
+
+.red-err {
+  color: red;
+  padding-top: 1rem;
+}
