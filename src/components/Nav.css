@@ -1,0 +1,37 @@
+/* Nav.css */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background-color: #eaf6ff;
+  border-bottom: 1px solid #c0dffb;
+  z-index: 1000;
+}
+
+.navbar-left {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.navbar-left a {
+  text-decoration: none;
+}
+
+.navber-left a:hover {
+  color: black;
+}
+
+.navbar-right a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #2196f3;
+  font-weight: 500;
+}
+
+.navbar-right a:hover {
+  color: rgb(142, 12, 12);
+}

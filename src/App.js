@@ -4,15 +4,19 @@ import { Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import TodoPage from "./pages/TodoPage";
 import RegisterPage from "./pages/RegisterPage";
+import Nav from "./components/Nav";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<TodoPage />} />
-      <Route path="/register" element={<RegisterPage />} />
+    <>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<TodoPage />} />
+        <Route path="/register" element={<RegisterPage />} />
 
-      <Route path="/login" element={<LoginPage />} />
-    </Routes>
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </>
   );
 }
 
