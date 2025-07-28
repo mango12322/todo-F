@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import api from "../utils/api";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   // 1. useState email, pw 만들기
@@ -14,14 +14,22 @@ const LoginPage = () => {
   // 5. 할 일 페이지로 이동하기
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); //
+  const [error, setError] = useState("");
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
 
     try {
       const response = await api.post("/user/login", { email, password });
-      console.log("response: ", response);
+      if (response.status === 200) {
+        setUser(response.data.user);
+        sessionStorage.setItem("token", response.data.token);
+        api.defaults.headers["authorization"] = "Bearer " + response.data.token;
+        setError("");
+        navigate("/");
+      }
     } catch (err) {
       console.error("로그인 실패:", err.response?.data || err.message);
       setError(err.response?.data?.message || "로그인에 실패했습니다.");

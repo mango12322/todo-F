@@ -6,8 +6,6 @@ import api from "../utils/api";
 import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
-  // 해야할 순서
-  // 1. 상태값들 만들기 (이름, 이메일, 비밀번호, 비밀번호 확인)
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +15,13 @@ const RegisterPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // 새로고침 방지
+
     try {
+      // 1. 입력값 모두 채워졌는지 검사
+      if (!name || !email || !password || !subPassword) {
+        throw new Error("모든 입력 칸을 채워주세요!");
+      }
+
       // 2. 비밀번호, 비밀번호 확인 두개 같은지 확인
       if (password !== subPassword) {
         throw new Error("패스워드가 일치하지 않습니다 다시 입력해주세요!");
@@ -31,7 +35,7 @@ const RegisterPage = () => {
         throw new Error(response.data.error);
       }
     } catch (err) {
-      setError(err.message);
+      setError(err.response?.data?.message || err.message || "회원가입 실패");
     }
   };
   return (
