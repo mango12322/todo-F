@@ -4,12 +4,15 @@ const api = axios.create({
   baseURL: `${process.env.REACT_APP_BACKEND_PROXY}/api`,
   headers: {
     "Content-Type": "application/json",
-    authorization: "Bearer " + sessionStorage.getItem("token"),
   },
 });
 
 api.interceptors.request.use(
   (request) => {
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      request.headers.authorization = `Bearer ${token}`;
+    }
     console.log("Starting Request", request);
     return request;
   },
