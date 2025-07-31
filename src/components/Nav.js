@@ -18,7 +18,7 @@ const Navbar = ({ user, handleLogout }) => {
         {user ? (
           <>
             <span className="me-3 fw-semibold text-success">
-              {user.username}님, 환영합니다!
+              {user.name}님, 환영합니다!
             </span>
             <button
               onClick={handleLogout}
