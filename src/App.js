@@ -20,10 +20,13 @@ function App() {
     try {
       const storedToken = sessionStorage.getItem("token");
       if (storedToken) {
+        api.defaults.headers["authorization"] = "Bearer " + storedToken;
+
         const response = await api.get("user/me");
         setUser(response.data.user);
       }
     } catch (err) {
+      console.error("토큰 인증 실패", err);
       setUser(null);
     }
   };
@@ -55,7 +58,7 @@ function App() {
 
         <Route
           path="/login"
-          element={<LoginPage setUser={(user, setUser)} />}
+          element={<LoginPage user={user} setUser={setUser} />}
         />
       </Routes>
     </>
